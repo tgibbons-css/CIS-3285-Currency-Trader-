@@ -14,6 +14,11 @@ namespace CurrencyTrader.AdoNet
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Write the trade records to the database
+        /// </summary>
+        /// <param name="trades"> A list of TradeRecord objects </param>
+
         public void Persist(IEnumerable<TradeRecord> trades)
         {
             logger.LogInfo("Connecting to Database");

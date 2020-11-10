@@ -15,7 +15,7 @@ namespace CurrencyTrader.Tests
         public void TestNormalTrade()
         {
             //Arrange
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
             var tradeValidator = new SimpleTradeValidator(logger);
             string[] strData = { "GBPUSD", "4444", "1.5" };
             //Act
@@ -28,7 +28,7 @@ namespace CurrencyTrader.Tests
         public void TestAmount999()
         {
             //Arrange
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
             var tradeValidator = new SimpleTradeValidator(logger);
             string[] strData = { "GBPUSD", "999", "1.5" };
             //Act
@@ -40,7 +40,7 @@ namespace CurrencyTrader.Tests
         public void TestAmount1000()
         {
             //Arrange
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
             var tradeValidator = new SimpleTradeValidator(logger);
             string[] strData = { "GBPUSD", "1000", "1.5" };
             //Act
@@ -52,7 +52,7 @@ namespace CurrencyTrader.Tests
         public void TestAmountNeg10000()
         {
             //Arrange
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
             var tradeValidator = new SimpleTradeValidator(logger);
             string[] strData = { "GBPUSD", "-10000", "1.51" };
             //Act
@@ -64,7 +64,7 @@ namespace CurrencyTrader.Tests
         public void TestAmount100k()
         {
             //Arrange
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
             var tradeValidator = new SimpleTradeValidator(logger);
             string[] strData = { "GBPUSD", "100000", "1.5" };
             //Act
@@ -76,7 +76,7 @@ namespace CurrencyTrader.Tests
         public void TestAmount101k()
         {
             //Arrange
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
             var tradeValidator = new SimpleTradeValidator(logger);
             string[] strData = { "GBPUSD", "100001", "1.5" };
             //Act

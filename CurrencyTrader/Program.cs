@@ -11,7 +11,7 @@ namespace CurrencyTrader
             var tradeStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SingleResponsibilityPrinciple.trades.txt");
             String tradeUrl = "http://faculty.css.edu/tgibbons/trades4.txt";
 
-            var logger = new ConsoleLogger();
+            var logger = new LoggerConsole();
 
             //var tradeDataProvider = new StreamTradeDataProvider(tradeStream);
             var tradeDataProvider = new UrlTradeDataProvider(tradeUrl);

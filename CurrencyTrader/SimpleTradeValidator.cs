@@ -12,6 +12,12 @@ namespace CurrencyTrader
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Checks the formate on a single line in the trade file.
+        /// </summary>
+        /// <param name="fields"> The string must be split into three components before calling </param>
+        /// <param name="currentLine"> This is the current line number in the file, used to report errors</param>
+        /// <returns> true if all the checks pass </returns>
         public bool Validate(string[] tradeData)
         {
             if (tradeData.Length != 3)
@@ -38,7 +44,7 @@ namespace CurrencyTrader
                 logger.LogWarning("Trade amount is below lower bound: '{0}'", tradeData[1]);
                 return false;
             }
-            if (tradeAmount > 1000000)
+            if (tradeAmount > 100000)
             {
                 logger.LogWarning("Trade amount is above upper bound: '{0}'", tradeData[1]);
                 return false;

@@ -6,6 +6,11 @@ namespace CurrencyTrader
 {
     public class SimpleTradeMapper : ITradeMapper
     {
+        /// <summary>
+        /// Converts a string containing the trade data into a TradeRecord object
+        /// </summary>
+        /// <param name="fields"> The string must be split into three components before calling </param>
+        /// <returns> A TradeRecord object containing the trade data</returns>
         public TradeRecord Map(string[] fields)
         {
             var sourceCurrencyCode = fields[0].Substring(0, 3);

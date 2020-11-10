@@ -104,7 +104,7 @@
             this.txtTradeUrl.Name = "txtTradeUrl";
             this.txtTradeUrl.Size = new System.Drawing.Size(234, 20);
             this.txtTradeUrl.TabIndex = 6;
-            this.txtTradeUrl.Text = "http://faculty.css.edu/tgibbons/trades4.txt";
+            this.txtTradeUrl.Text = "http://faculty.css.edu/tgibbons/trades100.txt";
             // 
             // lbTradeLines
             // 

@@ -15,6 +15,12 @@ namespace CurrencyTrader
             this.tradeMapper = tradeMapper;
         }
 
+        /// <summary>
+        /// Takes a list of strings containing trade data and converts this into a list of TradeRecord objects
+        /// </summary>
+        /// <param name="lines"> The strings containing the trade data, each string should contain one trade in format of "GBPUSD,1000,1.51"</param>
+        /// <returns> A list of TradeRecords, one record for each trade </returns>
+
         public IEnumerable<TradeRecord> Parse(IEnumerable<string> tradeData)
         {
             var trades = new List<TradeRecord>();
