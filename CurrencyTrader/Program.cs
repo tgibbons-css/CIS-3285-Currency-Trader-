@@ -22,8 +22,8 @@ namespace CurrencyTrader
 
             var tradeStorage = new AdoNetTradeStorage(logger);
 
-            var tradeProcessor = new TradeProcessor(tradeDataProvider, tradeParser, tradeStorage);
-            tradeProcessor.ProcessTrades();
+            var tradeProcessor = new TradeProcessor();
+            tradeProcessor.ProcessTrades(tradeDataProvider, tradeParser, tradeStorage);
 
             Console.ReadKey();
         }

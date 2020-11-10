@@ -18,6 +18,9 @@ namespace CurrencyTrader.Gui
     public partial class Form1 : Form
     {
         TradeProcessor tradeProcessor;
+        IEnumerable<string> lines;
+        ILogger logger;
+
         public Form1()
         {
             InitializeComponent();
@@ -25,26 +28,17 @@ namespace CurrencyTrader.Gui
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var tradeStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("SingleResponsibilityPrinciple.trades.txt");
-            String tradeUrl = "http://faculty.css.edu/tgibbons/trades100.txt";
-
-            var logger = new LoggerConsole();
-            //var logger = new GuiLogger(lbStatus.Items);
-
-            //var tradeDataProvider = new StreamTradeDataProvider(tradeStream);
-            var tradeDataProvider = new UrlTradeDataProvider(tradeUrl);
-
-            var tradeValidator = new SimpleTradeValidator(logger);
-            var tradeMapper = new SimpleTradeMapper();
-            var tradeParser = new SimpleTradeParser(tradeValidator, tradeMapper);
-
-            var tradeStorage = new AdoNetTradeStorage(logger);
-            tradeProcessor = new TradeProcessor(tradeDataProvider, tradeParser, tradeStorage);
+            ILogger baseLogger = new LoggerConsole();
+            logger = new LoggerGUI(lbStatus.Items, baseLogger);
+            tradeProcessor = new TradeProcessor();
         }
 
         private void btnReadTrades_Click(object sender, EventArgs e)
         {
-            IEnumerable<string> lines = tradeProcessor.ReadTrades();
+            //String tradeUrl = "http://faculty.css.edu/tgibbons/trades100.txt";
+            string tradeUrl = txtTradeUrl.Text.ToString();
+            ITradeDataProvider tradeDataProvider = new UrlTradeDataProvider(tradeUrl);
+            IEnumerable<string> lines = tradeProcessor.ReadTrades(tradeDataProvider);
             foreach (string line in lines)
             {
                 lbTradeLines.Items.Add(line);
@@ -54,13 +48,17 @@ namespace CurrencyTrader.Gui
 
         private void btnParseTrades_Click(object sender, EventArgs e)
         {
-            IEnumerable<TradeRecord> trades = tradeProcessor.ParseTrades();
-            txtNumTrades.Text = trades.Count().ToString();
+            var tradeValidator = new SimpleTradeValidator(logger);
+            var tradeMapper = new SimpleTradeMapper();
+            var tradeParser = new SimpleTradeParser(tradeValidator, tradeMapper);
+            int numTrades = tradeProcessor.ParseTrades(tradeParser, logger);
+            txtNumTrades.Text = numTrades.ToString();
         }
 
         private void btnStoreTrades_Click(object sender, EventArgs e)
         {
-            tradeProcessor.StoreTrades();
+            ITradeStorage tradeStorage = new AdoNetTradeStorage(logger);
+            tradeProcessor.StoreTrades(tradeStorage);
             txtStoreStatus.Text = "Trades written to database.";
         }
 
